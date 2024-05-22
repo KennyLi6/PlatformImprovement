@@ -7,11 +7,11 @@ class Load extends Phaser.Scene {
         this.load.setPath("./assets/");
 
         // Load characters spritesheet
-        this.load.atlas("platformer_characters", "platformerPack_character.png", "tilemap-characters-packed.json");
+        this.load.atlas("platformer_characters", "tilemap-characters-packed.png", "tilemap-characters-packed.json");
 
         // Load tilemap information
         this.load.image("tilemap_tiles", "tilemap_packed.png");                         // Packed tilemap
-        this.load.tilemapTiledJSON("platformer-level-1", "game-3-draft.tmj");   // Tilemap in JSON
+        this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
 
         // Load the tilemap as a spritesheet
         this.load.spritesheet("tilemap_sheet", "tilemap_packed.png", {
@@ -19,22 +19,13 @@ class Load extends Phaser.Scene {
             frameHeight: 18
         });
 
-        this.load.spritesheet("collectable_sheet", "tile_0107.png", {
-            frameWidth: 18,
-            frameHeight: 18
-        });
-
-        this.load.audio("jump", "jingles_PIZZI16.ogg");
-        this.load.audio("land", "footstep_snow_004.ogg");
-        this.load.audio("pickup", "click_002.ogg");
-
         // Oooh, fancy. A multi atlas is a texture atlas which has the textures spread
         // across multiple png files, so as to keep their size small for use with
         // lower resource devices (like mobile phones).
         // kenny-particles.json internally has a list of the png files
         // The multiatlas was created using TexturePacker and the Kenny
         // Particle Pack asset pack.
-        this.load.image("kenny-particles", "tile_0122.png");
+        this.load.multiatlas("kenny-particles", "kenny-particles.json");
     }
 
     create() {
@@ -42,8 +33,8 @@ class Load extends Phaser.Scene {
             key: 'walk',
             frames: this.anims.generateFrameNames('platformer_characters', {
                 prefix: "tile_",
-                start: 1,
-                end: 2,
+                start: 0,
+                end: 1,
                 suffix: ".png",
                 zeroPad: 4
             }),
@@ -64,7 +55,7 @@ class Load extends Phaser.Scene {
             key: 'jump',
             defaultTextureKey: "platformer_characters",
             frames: [
-                { frame: "tile_0003.png" }
+                { frame: "tile_0001.png" }
             ],
         });
 
